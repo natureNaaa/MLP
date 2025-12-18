@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>流动手帐 · 2023-2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="paper">
+    <header class="hero">
+      <div class="title-block">
+        <p class="label">一直在路上的四年</p>
+        <h1>流动手帐 · 2023-2026</h1>
+        <p class="subtitle">手绘涂鸦风格地图，记录跨城与跨国的迁徙。时间自动向前，地图慢慢移动，小人物一路走着。</p>
+      </div>
+      <div class="legend">
+        <div class="legend-item">
+          <span class="swatch path"></span>
+          <span>手绘轨迹</span>
+        </div>
+        <div class="legend-item">
+          <span class="swatch step"></span>
+          <span>路上的我</span>
+        </div>
+        <div class="legend-item">
+          <span class="swatch note"></span>
+          <span>到达时的便签</span>
+        </div>
+      </div>
+    </header>
+
+    <section id="map-stage">
+      <svg id="doodle-map" viewBox="0 0 2400 1400" role="img" aria-label="2023 到 2026 年间跨城与跨国的迁徙手绘地图">
+        <defs>
+          <filter id="ink-bleed" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+          <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.3" numOctaves="2" result="noise" />
+            <feColorMatrix in="noise" type="saturate" values="0" result="mono" />
+            <feComposite in="SourceGraphic" in2="mono" operator="arithmetic" k1="0.9" k2="0.6" />
+          </filter>
+          <pattern id="paper-grain" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+            <rect width="120" height="120" fill="rgba(255,255,255,0.08)"></rect>
+            <circle cx="20" cy="30" r="1" fill="rgba(0,0,0,0.08)"></circle>
+            <circle cx="80" cy="60" r="1.2" fill="rgba(0,0,0,0.05)"></circle>
+            <circle cx="50" cy="90" r="0.9" fill="rgba(0,0,0,0.07)"></circle>
+          </pattern>
+        </defs>
+
+        <g id="world" filter="url(#ink-bleed)">
+          <rect x="0" y="0" width="2400" height="1400" fill="url(#paper-grain)" opacity="0.45" />
+          <g id="continents" stroke="#7f8f9f" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="#dfe8ef">
+            <path d="M420 930 Q360 880 310 840 Q280 800 260 720 Q260 640 310 580 Q360 520 470 500 Q560 470 660 480 Q780 500 870 550 Q940 600 960 680 Q980 760 930 820 Q880 880 790 930 Q700 960 600 960 Q500 960 420 930 Z" opacity="0.85" />
+            <path d="M1280 780 Q1160 760 1100 700 Q1040 640 1030 560 Q1040 470 1110 420 Q1200 350 1320 330 Q1460 320 1570 350 Q1700 390 1780 460 Q1860 520 1910 620 Q1940 690 1910 760 Q1880 820 1800 860 Q1700 900 1600 900 Q1460 900 1280 780 Z" opacity="0.75" />
+            <path d="M1850 1030 Q1770 1000 1720 940 Q1670 880 1650 810 Q1630 750 1650 690 Q1700 600 1790 560 Q1890 520 2000 540 Q2100 560 2170 620 Q2230 680 2250 760 Q2260 840 2210 900 Q2160 960 2080 1000 Q1980 1040 1850 1030 Z" opacity="0.8" />
+          </g>
+
+          <g id="sea-doodles" stroke="#9db7c8" stroke-width="3" stroke-linecap="round" fill="none">
+            <path d="M150 1160 q60 -40 140 0 q70 45 140 0" opacity="0.5" />
+            <path d="M1900 280 q40 35 100 20 q60 -10 110 30" opacity="0.4" />
+            <path d="M1180 150 q80 30 160 -10 q70 -30 140 40" opacity="0.35" />
+          </g>
+
+          <path id="route" d="M620 940 C650 900 720 860 770 810 C830 750 870 700 880 640 C900 560 860 520 800 500 C720 470 660 430 640 380 C620 340 630 290 700 270 C820 230 960 260 1050 340 C1140 420 1200 520 1280 620 C1340 690 1400 740 1480 740 C1600 740 1680 680 1770 650 C1880 610 1980 630 2080 700 C2160 760 2220 860 2250 970" stroke="#f59bb4" stroke-width="10" stroke-linecap="round" fill="none" stroke-dasharray="8 18" opacity="0.4" />
+          <path id="trace" d="M620 940 C650 900 720 860 770 810 C830 750 870 700 880 640 C900 560 860 520 800 500 C720 470 660 430 640 380 C620 340 630 290 700 270 C820 230 960 260 1050 340 C1140 420 1200 520 1280 620 C1340 690 1400 740 1480 740 C1600 740 1680 680 1770 650 C1880 610 1980 630 2080 700 C2160 760 2220 860 2250 970" stroke="#e85b8c" stroke-width="9" stroke-linecap="round" fill="none" stroke-dasharray="2000" stroke-dashoffset="2000" />
+
+          <g id="notes-layer"></g>
+          <g id="hero" class="hero-figure" transform="translate(620 940)">
+            <g class="shadow" opacity="0.25">
+              <ellipse cx="0" cy="16" rx="14" ry="6" fill="#000" />
+            </g>
+            <g class="body" fill="none" stroke="#1f2a44" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="head" cx="0" cy="-14" r="11" fill="#f6e6d9" />
+              <path d="M0 -3 v16" />
+              <path d="M-10 2 Q-16 6 -18 12" />
+              <path d="M10 2 Q16 6 18 12" />
+              <path class="leg-left" d="M0 13 q-4 12 -2 24" />
+              <path class="leg-right" d="M0 13 q6 12 8 24" />
+            </g>
+            <circle class="cheek" cx="-4" cy="-12" r="2" fill="#f59bb4" opacity="0.8" />
+            <circle class="cheek" cx="6" cy="-12" r="2" fill="#f59bb4" opacity="0.8" />
+          </g>
+        </g>
+      </svg>
+    </section>
+
+    <footer class="timeline-hint">
+      <p>时间自动往前走，地图也跟着挪动。偶尔停顿，呼吸，然后继续出发。</p>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
