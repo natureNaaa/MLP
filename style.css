@@ -1,0 +1,225 @@
+:root {
+  --bg: #f8f5ef;
+  --ink: #243043;
+  --accent: #e85b8c;
+  --accent-soft: #f59bb4;
+  --note: #f6d9a7;
+  --note-line: #d8a24d;
+  --sea: #9db7c8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: radial-gradient(circle at 20% 20%, #fefefe 0, #f8f5ef 35%, #f2ece2 70%);
+  color: var(--ink);
+}
+
+.paper {
+  min-height: 100vh;
+  background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0) 0 42px, rgba(0, 0, 0, 0.02) 43px 44px),
+    radial-gradient(circle at 40% 0%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)),
+    var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px clamp(16px, 3vw, 40px) 8px;
+  gap: 16px;
+}
+
+.title-block h1 {
+  margin: 2px 0;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: 0.02em;
+}
+
+.title-block .subtitle {
+  max-width: 720px;
+  margin: 4px 0 0;
+  line-height: 1.6;
+  color: #405170;
+}
+
+.label {
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1.5px dashed #9db7c8;
+  border-radius: 10px;
+  background: rgba(157, 183, 200, 0.12);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+.legend {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1.5px dashed rgba(157, 183, 200, 0.45);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.legend .swatch {
+  width: 18px;
+  height: 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.swatch.path { background: linear-gradient(120deg, var(--accent) 0%, var(--accent-soft) 100%); }
+.swatch.step { background: #1f2a44; width: 14px; height: 14px; border-radius: 50%; }
+.swatch.note { background: var(--note); border: 1px dashed var(--note-line); width: 20px; height: 14px; }
+
+#map-stage {
+  width: 100%;
+  height: calc(100vh - 210px);
+  min-height: 480px;
+  position: relative;
+  overflow: hidden;
+  border-top: 2px solid rgba(36, 48, 67, 0.08);
+  border-bottom: 2px solid rgba(36, 48, 67, 0.08);
+}
+
+#doodle-map {
+  width: 2400px;
+  height: 1400px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: transform 1.2s ease;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.08));
+}
+
+#continents path {
+  filter: url(#pencil);
+}
+
+#trace {
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.hero-figure {
+  transition: transform 0.6s ease;
+  filter: drop-shadow(0 6px 4px rgba(0,0,0,0.15));
+}
+
+.hero-figure .body { animation: wiggle 1.8s ease-in-out infinite; }
+.hero-figure .leg-left { animation: step 1.6s ease-in-out infinite; transform-origin: 0 13px; }
+.hero-figure .leg-right { animation: step 1.6s ease-in-out infinite reverse; transform-origin: 0 13px; }
+.hero-figure .shadow { animation: shadow 1.6s ease-in-out infinite; }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes step {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(12deg); }
+}
+
+@keyframes shadow {
+  0%, 100% { transform: scaleX(1); opacity: 0.25; }
+  50% { transform: scaleX(0.8); opacity: 0.18; }
+}
+
+.note {
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.note.visible {
+  opacity: 1;
+  transform: translate(0, -6px);
+}
+
+.note rect {
+  fill: var(--note);
+  stroke: var(--note-line);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 6;
+  rx: 12;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+}
+
+.note text {
+  font-family: "Caveat", "LXGW WenKai", "Segoe UI", system-ui;
+  font-size: 16px;
+  fill: var(--ink);
+}
+
+.note .title { font-weight: 700; font-size: 17px; }
+.note .place { fill: #4c657f; font-size: 15px; }
+.note .desc { font-size: 15px; }
+
+.timeline-hint {
+  padding: 12px clamp(16px, 3vw, 40px) 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #405170;
+}
+
+.timeline-hint p {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+}
+
+.progress-bar {
+  height: 10px;
+  width: 100%;
+  background: rgba(157, 183, 200, 0.25);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px dashed rgba(157, 183, 200, 0.4);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 80%);
+  transition: width 0.6s ease;
+}
+
+@media (max-width: 1024px) {
+  #doodle-map {
+    width: 2000px;
+    height: 1166px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  #map-stage {
+    height: calc(100vh - 240px);
+  }
+
+  .legend {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
